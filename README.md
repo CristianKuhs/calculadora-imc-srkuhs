@@ -1,4 +1,3 @@
-<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +11,7 @@
     }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(135deg, #141e30, #243b55);
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -20,13 +19,15 @@
       justify-content: center;
       min-height: 100vh;
       padding: 20px;
+      animation: fadeIn 1s ease forwards;
     }
     h1 {
       text-align: center;
       margin-bottom: 20px;
-      font-size: 2.2rem;
-      color: #f8f8f8;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      font-size: 2.4rem;
+      color: #ffffff;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+      letter-spacing: 1px;
     }
     /* ==== CONTAINER ==== */
     .container {
@@ -35,20 +36,23 @@
       padding: 30px;
       width: 100%;
       max-width: 400px;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-      animation: fadeIn 1s ease forwards;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
       margin-bottom: 20px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .container:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    /* ==== INPUTS E BOTÃO ==== */
     .campo {
       display: flex;
       flex-direction: column;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
     .campo label {
       margin-bottom: 5px;
@@ -56,17 +60,18 @@
       color: #ddd;
     }
     .campo input {
-      padding: 10px;
-      border-radius: 10px;
+      padding: 12px;
+      border-radius: 12px;
       border: none;
       outline: none;
       background: rgba(255, 255, 255, 0.1);
       color: #fff;
       font-size: 1rem;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.3s;
     }
     .campo input:focus {
       background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.02);
     }
     button {
       width: 100%;
@@ -75,16 +80,15 @@
       border-radius: 12px;
       background: linear-gradient(135deg, #00c6ff, #0072ff);
       color: #fff;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: bold;
       cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
     button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 20px rgba(0, 114, 255, 0.5);
+      transform: scale(1.07);
+      box-shadow: 0 6px 20px rgba(0, 114, 255, 0.6);
     }
-    /* ==== RESULTADO ==== */
     #resultado {
       margin-top: 20px;
       padding: 15px;
@@ -93,20 +97,11 @@
       font-size: 1.2rem;
       font-weight: 500;
       transition: background 0.3s, transform 0.3s;
+      background: rgba(255, 255, 255, 0.05);
     }
-    .bom {
-      background: rgba(0, 200, 83, 0.3);
-      color: #00e676;
-    }
-    .alerta {
-      background: rgba(255, 193, 7, 0.3);
-      color: #ffca28;
-    }
-    .perigo {
-      background: rgba(244, 67, 54, 0.3);
-      color: #ff5252;
-    }
-    /* ==== FOOTER ==== */
+    .bom { background: rgba(0, 200, 83, 0.25); color: #00e676; }
+    .alerta { background: rgba(255, 193, 7, 0.25); color: #ffca28; }
+    .perigo { background: rgba(244, 67, 54, 0.25); color: #ff5252; }
     footer {
       text-align: center;
       font-size: 0.9rem;
@@ -126,20 +121,29 @@
     <h1>Calculadora de IMC</h1>
     <div class="campo">
       <label for="peso">Peso (kg):</label>
-      <input type="number" id="peso" placeholder="Ex: 70">
+      <input type="number" id="peso" placeholder="Ex: 70" min="0" step="0.1">
     </div>
     <div class="campo">
       <label for="altura">Altura (m):</label>
-      <input type="number" id="altura" placeholder="Ex: 1.75" step="0.01">
+      <input type="text" id="altura" placeholder="Ex: 1.75" maxlength="4">
     </div>
-    <button id="calcular">Calcular</button>
+    <button id="calcular" type="button">Calcular</button>
     <div id="resultado"></div>
   </div>
 
   <footer>Created by Cristian Kuhs</footer>
 
   <script>
-    document.getElementById("calcular").addEventListener("click", function () {
+    // Inserir ponto automaticamente no campo altura
+    document.getElementById("altura").addEventListener("input", function () {
+      let valor = this.value.replace(".", "");
+      if (valor.length === 3 && !valor.includes(".")) {
+        this.value = valor[0] + "." + valor.slice(1);
+      }
+    });
+
+    // Função de cálculo do IMC
+    document.getElementById("calcular").addEventListener("click", () => {
       const peso = parseFloat(document.getElementById("peso").value);
       const altura = parseFloat(document.getElementById("altura").value);
       const resultado = document.getElementById("resultado");
@@ -168,4 +172,17 @@
         classe = "alerta";
       } else if (imc < 39.9) {
         classificacao = "Obesidade II";
-        classe = "al
+        classe = "alerta";
+      } else {
+        classificacao = "Obesidade III";
+        classe = "perigo";
+      }
+
+      resultado.className = classe;
+      resultado.innerHTML = `<p>Seu IMC é <strong>${imc}</strong> (${classificacao}).</p>`;
+      resultado.style.transform = "scale(1.1)";
+      setTimeout(() => resultado.style.transform = "scale(1)", 300);
+    });
+  </script>
+</body>
+</html>
