@@ -11,7 +11,6 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
@@ -23,7 +22,6 @@
       min-height: 100vh;
       padding: 20px;
     }
-
     h1 {
       text-align: center;
       margin-bottom: 20px;
@@ -31,7 +29,6 @@
       color: #f8f8f8;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     }
-
     /* ==== CONTAINER ==== */
     .container {
       background: rgba(255, 255, 255, 0.05);
@@ -44,25 +41,21 @@
       animation: fadeIn 1s ease forwards;
       margin-bottom: 20px;
     }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     /* ==== INPUTS E BOTÃO ==== */
     .campo {
       display: flex;
       flex-direction: column;
       margin-bottom: 15px;
     }
-
     .campo label {
       margin-bottom: 5px;
       font-weight: 500;
       color: #ddd;
     }
-
     .campo input {
       padding: 10px;
       border-radius: 10px;
@@ -73,11 +66,9 @@
       font-size: 1rem;
       transition: background 0.3s;
     }
-
     .campo input:focus {
       background: rgba(255, 255, 255, 0.2);
     }
-
     button {
       width: 100%;
       padding: 12px;
@@ -90,12 +81,10 @@
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-
     button:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 20px rgba(0, 114, 255, 0.5);
     }
-
     /* ==== RESULTADO ==== */
     #resultado {
       margin-top: 20px;
@@ -106,22 +95,18 @@
       font-weight: 500;
       transition: background 0.3s, transform 0.3s;
     }
-
     .bom {
       background: rgba(0, 200, 83, 0.3);
       color: #00e676;
     }
-
     .alerta {
       background: rgba(255, 193, 7, 0.3);
       color: #ffca28;
     }
-
     .perigo {
       background: rgba(244, 67, 54, 0.3);
       color: #ff5252;
     }
-
     /* ==== FOOTER ==== */
     footer {
       text-align: center;
