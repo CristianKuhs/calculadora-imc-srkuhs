@@ -87,7 +87,6 @@
       border-radius: 5px;
     }
   </style>
-</head>
 <body>
   <div class="container">
     <h1>Calculadora de IMC</h1>
