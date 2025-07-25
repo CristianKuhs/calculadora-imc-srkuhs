@@ -139,5 +139,3 @@
       resultado.style.background = "rgba(255,255,255,0.1)";
     });
   </script>
-</body>
-</html>
