@@ -2,7 +2,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculadora IMC</title>
   <style>
-    /* ==== RESET E BASE ==== */
     * {
       margin: 0;
       padding: 0;
@@ -28,7 +27,6 @@
       text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
       letter-spacing: 1px;
     }
-    /* ==== CONTAINER ==== */
     .container {
       background: rgba(255, 255, 255, 0.05);
       border-radius: 20px;
@@ -129,34 +127,26 @@
     <button id="calcular" type="button">Calcular</button>
     <div id="resultado"></div>
   </div>
-
   <footer>Created by Cristian Kuhs</footer>
-
-  <script>
-    // Inserir ponto automaticamente no campo altura
+    <script>
     document.getElementById("altura").addEventListener("input", function () {
       let valor = this.value.replace(".", "");
       if (valor.length === 3 && !valor.includes(".")) {
         this.value = valor[0] + "." + valor.slice(1);
       }
     });
-
-    // Função de cálculo do IMC
     document.getElementById("calcular").addEventListener("click", () => {
       const peso = parseFloat(document.getElementById("peso").value);
       const altura = parseFloat(document.getElementById("altura").value);
       const resultado = document.getElementById("resultado");
-
       if (!peso || !altura || peso <= 0 || altura <= 0) {
         resultado.textContent = "Por favor, insira valores válidos.";
         resultado.className = "perigo";
         return;
       }
-
       const imc = (peso / (altura * altura)).toFixed(2);
       let classificacao = "";
       let classe = "";
-
       if (imc < 18.5) {
         classificacao = "Abaixo do peso";
         classe = "alerta";
@@ -176,7 +166,6 @@
         classificacao = "Obesidade III";
         classe = "perigo";
       }
-
       resultado.className = classe;
       resultado.innerHTML = `<p>Seu IMC é <strong>${imc}</strong> (${classificacao}).</p>`;
       resultado.style.transform = "scale(1.1)";
